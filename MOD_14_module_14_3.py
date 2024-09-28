@@ -6,7 +6,7 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from keyboards import *
 from texts import *
 
-api = '7318149436:AAGsSUVCDgZhtmeaAEPHaoSxhZDaYpYoO_U'
+api = '________'
 bot = Bot(token=api)
 dp = Dispatcher(bot, storage=MemoryStorage())
 
