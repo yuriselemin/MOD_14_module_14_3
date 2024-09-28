@@ -1,8 +1,6 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 
 
-
-
 kb = ReplyKeyboardMarkup(
     [
         [KeyboardButton(text='Купить')]
@@ -23,3 +21,5 @@ product_b2 = InlineKeyboardButton(text='Чомпу', callback_data="product_buyi
 product_b3 = InlineKeyboardButton(text='Аки', callback_data="product_buying")
 product_b4 = InlineKeyboardButton(text='Амбарелла', callback_data="product_buying")
 product_kb.add(product_b1, product_b2, product_b3, product_b4)
+
+
