@@ -6,7 +6,7 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from keyboards import *
 from texts import *
 
-api = '7318149436:AAGsSUVCDgZhtmeaAEPHaoSxhZDaYpYoO_U'
+api = '______'
 bot = Bot(token=api)
 dp = Dispatcher(bot, storage=MemoryStorage())
 
@@ -89,3 +89,5 @@ async def send_confirm_message(call):
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
+
+
