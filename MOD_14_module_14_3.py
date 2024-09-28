@@ -6,7 +6,7 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from keyboards import *
 from texts import *
 
-api = '______'
+api = '7318149436:AAGsSUVCDgZhtmeaAEPHaoSxhZDaYpYoO_U'
 bot = Bot(token=api)
 dp = Dispatcher(bot, storage=MemoryStorage())
 
@@ -19,7 +19,7 @@ class UserState(StatesGroup):
 
 @dp.message_handler(commands='start')
 async def start_message(message):
-    await message.answer('Привет! Я бот, помогающий твоему здоровью.', reply_markup=kb)
+    await message.answer('Привет! Я бот, помогающий твоему здоровью.', reply_markup=start_kb)
 
 
 @dp.message_handler(text='Рассчитать')
@@ -89,5 +89,3 @@ async def send_confirm_message(call):
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
-
-
