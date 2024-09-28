@@ -6,7 +6,7 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from keyboards import *
 from texts import *
 
-api = '________'
+api = '7318149436:AAGsSUVCDgZhtmeaAEPHaoSxhZDaYpYoO_U'
 bot = Bot(token=api)
 dp = Dispatcher(bot, storage=MemoryStorage())
 
@@ -17,12 +17,14 @@ class UserState(StatesGroup):
     weight = State()
 
 
-@dp.message_handler(commands='start')
-async def start_message(message):
-    await message.answer('Привет! Я бот, помогающий твоему здоровью.', reply_markup=start_kb)
+@dp.message_handler(commands=['start'])
+async def start(message):
+    await message.reply('Привет! Я бот помогающий твоему здоровью.'
+                        '\nВыберите, что Вы хотите сделать:'
+                        '\n',reply_markup=start_kb)
 
 
-@dp.message_handler(text='Рассчитать')
+@dp.message_handler(text='Рассчитать', state='*')
 async def main_menu(message):
     await message.answer('Выберите опцию:', reply_markup=menu_kb)
 
@@ -49,19 +51,25 @@ async def set_weight(message, state):
 
 
 @dp.message_handler(state=UserState.weight)
-async def set_calories(message, state):
+async def send_calories(message, state):
     await state.update_data(weight=int(message.text))
     data = await state.get_data()
-    result = 10 * data['weight'] + 6.25 * data['growth'] - 5 * data['age'] - 161
-    await message.answer(f'Ваша норма калорий: {result}')
+    age = int(data.get('age'))
+    growth = int(data.get('growth'))
+    weight = int(data.get('weight'))
+    calories = (10 * weight) + (6.25 * growth) - (5 * age) - 161
+    await message.answer(f'Ваша норма калорий: {calories}')
     await state.finish()
+
 
 
 
 @dp.callback_query_handler(text='formulas')
 async def get_formulas(call):
-    await call.message.answer('10 x вес (кг) + 6,25 x рост (см) – 5 x возраст (г) – 161')
+    await call.message.answer('Формула Миффлина-Сан Жеора для расчёта нормы калорий:\n'
+                               'Калории = (10 * вес) + (6.25 * рост) - (5 * возраст) - 161')
     await call.answer()
+
 
 
 
